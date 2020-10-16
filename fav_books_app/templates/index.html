@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="reg_div">
+            <h1>Register</h1>
+            <form action="/registration" method="post">
+            {% csrf_token %}
+                <div class="form-group">
+                    <label>First Name:</label>
+                    <input name="first_name" type="text" class="form-control" placeholder="First Name Here">
+                    <span class="text-danger">
+                        {% for message in messages %}
+                            {% if message.tags == 'first_name error' %}
+                                {{ message }}
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Last Name:</label>
+                    <input name="last_name" type="text" class="form-control" placeholder="Last Name Here">
+                    <span class="text-danger">
+                        {% for message in messages %}
+                            {% if message.tags == 'last_name error' %}
+                                {{ message }}
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input name="email" type="text" class="form-control" placeholder="Email Here">
+                    <span class="text-danger">
+                        {% for message in messages %}
+                            {% if message.tags == 'email error' %}
+                                {{ message }}
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input name="password" type="password" class="form-control" placeholder="Password Here">
+                    <span class="text-danger">
+                        {% for message in messages %}
+                            {% if message.tags == 'password error' %}
+                                {{ message }}
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input name="password_confirm" type="password" class="form-control" placeholder="Password Here">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            
+            </form>
+        </div>
+        <!--end of reg_div-->
+
+        <div id="login_div">
+            <h1>Login</h1>
+            <form action="/login" method="post">
+            {% csrf_token %}
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input name="login_email" type="text" class="form-control" placeholder="Email Here">
+                    <span class="text-danger">
+                        {% for message in messages %}
+                            {% if message.tags == 'login_email error' %}
+                                {{ message }}
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input name="login_password" type="password" class="form-control" placeholder="Password Here">
+                    <span class="text-danger">
+                        {% for message in messages %}
+                            {% if message.tags == 'login_password error' %}
+                                {{ message }}
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+        </div>
+        <!--end of login_div-->
+
+    </div>
+    <!--end of wrapper-->
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+body {
+    background-color:black;
+    color:rgb(233, 212, 204);
+}
+
+
+#wrapper {
+    max-width:800px;
+    display:flex;
+    justify-content:center;
+    margin:50px auto;
+    padding:20px;
+    border:2px solid rgb(233, 212, 204);
+}
+
+#display_books {
+    border:2px solid rgb(233, 212, 204);
+    padding:10px;
+    margin:20px 0px;
+}
+
+#reg_div {
+    margin:10px;
+}
+
+#login_div {
+    margin:10px;
+}
+
+#header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px;
+}
+
+#container {
+    max-width:800px;
+    margin:50px auto;
+    padding:20px;
+    border:2px solid rgb(233, 212, 204);
+}
+
+#main {
+    display:flex;
+    justify-content:space-between;
+    padding:20px;
+}
+
+#add_book_div {
+    padding:20px;
+}
+
+#books_list {
+    padding:20px;
+}
+
+#book_likes_list {
+    padding:20px;
+}

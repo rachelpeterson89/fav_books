@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+    <div id="container">
+
+        <div id="header">
+            <h1>Welcome, {{ user.first_name }}!</h1>
+            <a href="/logout" name="logout">Logout</a>
+        </div>
+        <!--end of header-->
+
+        <div id="main">
+            <div id="add_book_div">
+
+                <h3>Add a Favorite Book</h3>
+
+                <form action="/add_a_book" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input name="book_title" type="text" class="form-control" placeholder="Book Title Here">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Author:</label>
+                        <input name="book_author" type="text" class="form-control" placeholder="Author Here">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea name="book_desc" rows="4" class="form-control" placeholder="Book Description Here">
+                        </textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                </form>
+
+            </div>
+            <!--end of add_book_div-->
+
+            <div id="books_list">
+                <h3>All Books</h3>
+
+                {% for book in all_the_books %}
+                <div id="display_books">
+                    <a href="/books/{{ book.id }}">{{ book.title }}</a>
+                    <p>(added by {{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }})</p>
+                    <p>{{ book.desc }}</p>
+
+                    {% for person in book.users_who_like.all %}
+
+                        {% if person.id == user.id %}
+                            <p class="text-warning">(This is one of your 
+                            Favorited Books)</p>
+                        
+                        {% elif person.id != user.id %}
+                        <a href="/dashboard_faves/{{ book.id }}/{{ user.id }}">Add to Favorites</a>
+
+                        {% endif %}
+                        
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                <!--end of display_books-->
+            </div>
+
+        </div>
+        <!--end of main-->
+
+    </div>
+    <!--end of wrapper-->
+</body>
+
+</html>
